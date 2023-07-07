@@ -27,12 +27,12 @@ public class DriveTrain extends OpMode {
     public void loop() {
         double verticalMovement = -gamepad1.left_stick_y;
         double strafe = gamepad1.left_stick_x * 1.1;
-        double pivotTurning = gamepad1.right_stick_x;
-        double maintainRatio = Math.max(Math.abs(verticalMovement) + Math.abs(strafe) + Math.abs(pivotTurning),1);
-        frontRightMotor.setPower((verticalMovement - strafe - pivotTurning)/maintainRatio);
-        backRightMotor.setPower((verticalMovement + strafe - pivotTurning)/maintainRatio);
-        frontLeftMotor.setPower((verticalMovement + strafe + pivotTurning)/maintainRatio);
-        backLeftMotor.setPower((verticalMovement - strafe + pivotTurning)/maintainRatio);
+        double turning = gamepad1.right_stick_x;
+        double maintainRatio = Math.max(Math.abs(verticalMovement) + Math.abs(strafe) + Math.abs(turning),1);
+        frontRightMotor.setPower((verticalMovement - strafe - turning)/maintainRatio);
+        backRightMotor.setPower((verticalMovement + strafe - turning)/maintainRatio);
+        frontLeftMotor.setPower((verticalMovement + strafe + turning)/maintainRatio);
+        backLeftMotor.setPower((verticalMovement - strafe + turning)/maintainRatio);
 
     }
 }
