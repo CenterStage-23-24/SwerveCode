@@ -14,7 +14,7 @@ public class DriveTrain extends OpMode {
     private DcMotor backLeftMotor;
 
     @Override
-    //creates hardware map
+    //creates hardwaremap
     public void init() {
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
