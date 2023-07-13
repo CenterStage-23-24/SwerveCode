@@ -1,15 +1,17 @@
 package org.firstinspires.ftc.teamcode.Omkar;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-public class DriveTrainRun extends LinearOpMode {
-    public void runOpMode() {
-        DriveTrain drive = new DriveTrain();
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+
+public class DriveTrainRun extends OpMode {
+    DriveTrain drive = new DriveTrain();
+    @Override
+    public void init() {
         drive.init();
-        waitForStart();
-        while (opModeIsActive()) {
-            drive.loop();
-        }
+    }
+    @Override
+    public void loop() {
+        drive.loop();
     }
 
 }

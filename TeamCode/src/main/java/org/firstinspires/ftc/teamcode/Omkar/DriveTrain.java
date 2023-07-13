@@ -8,11 +8,12 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp
 public class DriveTrain extends OpMode {
 
-  private DcMotor frontRightMotor;
-  private DcMotor frontLeftMotor;
-  private DcMotor backRightMotor;
-  private DcMotor backLeftMotor;
-@Override
+    private DcMotor frontRightMotor;
+    private DcMotor frontLeftMotor;
+    private DcMotor backRightMotor;
+    private DcMotor backLeftMotor;
+
+    @Override
     public void init() {
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
@@ -28,11 +29,16 @@ public class DriveTrain extends OpMode {
         double verticalMovement = -gamepad1.left_stick_y;
         double strafe = gamepad1.left_stick_x * 1.1;
         double turning = gamepad1.right_stick_x;
-        double maintainRatio = Math.max(Math.abs(verticalMovement) + Math.abs(strafe) + Math.abs(turning),1);
-        frontRightMotor.setPower((verticalMovement - strafe - turning)/maintainRatio);
-        backRightMotor.setPower((verticalMovement + strafe - turning)/maintainRatio);
-        frontLeftMotor.setPower((verticalMovement + strafe + turning)/maintainRatio);
-        backLeftMotor.setPower((verticalMovement - strafe + turning)/maintainRatio);
+        double maintainRatio = Math.max(Math.abs(verticalMovement) + Math.abs(strafe) + Math.abs(turning), 1);
+        frontRightMotor.setPower((verticalMovement - strafe - turning) / maintainRatio);
+        backRightMotor.setPower((verticalMovement + strafe - turning) / maintainRatio);
+        frontLeftMotor.setPower((verticalMovement + strafe + turning) / maintainRatio);
+        backLeftMotor.setPower((verticalMovement - strafe + turning) / maintainRatio);
+        telemetry.addData("frontRightMotor power: ", frontRightMotor.getPower());
+        telemetry.addData("frontLeftMotor power: ", frontLeftMotor.getPower());
+        telemetry.addData("backRightMotor power: ", backRightMotor.getPower());
+        telemetry.addData("backLeftMotor power: ", backLeftMotor.getPower());
+        telemetry.update();
 
     }
 }
