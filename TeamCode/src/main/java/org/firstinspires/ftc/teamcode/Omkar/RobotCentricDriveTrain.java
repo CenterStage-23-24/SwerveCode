@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp
-public class DriveTrain extends OpMode {
+public class RobotCentricDriveTrain extends OpMode {
 
     private DcMotor frontRightMotor;
     private DcMotor frontLeftMotor;

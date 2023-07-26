@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp
 public class DriveTrainRun extends OpMode {
-    DriveTrain drive = new DriveTrain();
+    RobotCentricDriveTrain drive = new RobotCentricDriveTrain();
     @Override
     public void init() {
         drive.init();
