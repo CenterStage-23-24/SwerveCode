@@ -43,14 +43,14 @@ public class FieldCentricDriveTrain extends OpMode {
             imu.resetYaw();
         }
 
-        double rotationStrafe = (strafe * Math.cos(-heading)) - (verticalMovement * Math.sin(-heading));
-        double rotationVerticalMovement = (strafe * Math.sin(-heading)) + (verticalMovement * Math.cos(-heading));
+        double rotatedStrafe = (strafe * Math.cos(-heading)) - (verticalMovement * Math.sin(-heading));
+        double rotatedVerticalMovement = (strafe * Math.sin(-heading)) + (verticalMovement * Math.cos(-heading));
 
-        double maintainRatio = Math.max(Math.abs(rotationVerticalMovement) + Math.abs(rotationStrafe) + Math.abs(turning), 1);
-        frontRightMotor.setPower((rotationVerticalMovement - rotationStrafe - turning) / maintainRatio);
-        backRightMotor.setPower((rotationVerticalMovement + rotationStrafe - turning) / maintainRatio);
-        frontLeftMotor.setPower((rotationVerticalMovement + rotationStrafe + turning) / maintainRatio);
-        backLeftMotor.setPower((rotationVerticalMovement - rotationStrafe + turning) / maintainRatio);
+        double maintainRatio = Math.max(Math.abs(rotatedVerticalMovement) + Math.abs(rotatedStrafe) + Math.abs(turning), 1);
+        frontRightMotor.setPower((rotatedVerticalMovement - rotatedStrafe - turning) / maintainRatio);
+        backRightMotor.setPower((rotatedVerticalMovement + rotatedStrafe - turning) / maintainRatio);
+        frontLeftMotor.setPower((rotatedVerticalMovement + rotatedStrafe + turning) / maintainRatio);
+        backLeftMotor.setPower((rotatedVerticalMovement - rotatedStrafe + turning) / maintainRatio);
         telemetry.addData("frontRightMotor power: ", frontRightMotor.getPower());
         telemetry.addData("frontLeftMotor power: ", frontLeftMotor.getPower());
         telemetry.addData("backRightMotor power: ", backRightMotor.getPower());
