@@ -21,8 +21,8 @@ public class RobotCentricDriveTrain extends OpMode {
         backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
         backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
 
-        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     @Override
