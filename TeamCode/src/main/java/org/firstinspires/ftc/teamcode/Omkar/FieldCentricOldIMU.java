@@ -1,3 +1,4 @@
+
 package org.firstinspires.ftc.teamcode.Omkar;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
@@ -11,12 +12,12 @@ import com.qualcomm.robotcore.hardware.IMU;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @TeleOp
-public class FieldCentricDriveTrain extends OpMode {
+public class FieldCentricOldIMU extends OpMode {
     private DcMotor frontRightMotor;
     private DcMotor frontLeftMotor;
     private DcMotor backRightMotor;
     private DcMotor backLeftMotor;
-    private IMU imu;
+    private BNO055IMU imu;
 
     @Override
     public void init() {
@@ -28,21 +29,24 @@ public class FieldCentricDriveTrain extends OpMode {
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        imu = hardwareMap.get(IMU.class, "imu");
-        IMU.Parameters params = new IMU.Parameters(
-                new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD, RevHubOrientationOnRobot.UsbFacingDirection.RIGHT));
-        imu.initialize(params);
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+        imu.initialize(parameters);
+
+
+
     }
     @Override
     public void loop() {
         double verticalMovement = -gamepad1.left_stick_y;
         double strafe = gamepad1.left_stick_x * 1.1;
         double turning = gamepad1.right_stick_x;
-        double heading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+        double heading = imu.getAngularOrientation().firstAngle; // change from positive
 
-        if (gamepad1.right_bumper) {
-            imu.resetYaw();
-        }
+      //  if (gamepad1.right_bumper) {
+        //    imu.resetYaw();
+        //}
 
         double rotatedStrafe = (strafe * Math.cos(-heading)) - (verticalMovement * Math.sin(-heading));
         double rotatedVerticalMovement = (strafe * Math.sin(-heading)) + (verticalMovement * Math.cos(-heading));
@@ -60,3 +64,9 @@ public class FieldCentricDriveTrain extends OpMode {
     }
 
 }
+
+
+
+
+
+

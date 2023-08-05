@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp
-public class FieldCentricRun extends LinearOpMode {
+public class RobotCentricRun extends LinearOpMode {
+    RobotCentricDriveTrain drive = new RobotCentricDriveTrain();
 
-    FieldCentricDriveTrain drive = new FieldCentricDriveTrain();
     @Override
     public void runOpMode() {
         while(opModeIsActive()) {
