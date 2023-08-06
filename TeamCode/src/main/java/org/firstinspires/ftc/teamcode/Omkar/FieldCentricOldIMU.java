@@ -42,7 +42,7 @@ public class FieldCentricOldIMU extends OpMode {
         double verticalMovement = -gamepad1.left_stick_y;
         double strafe = gamepad1.left_stick_x * 1.1;
         double turning = gamepad1.right_stick_x;
-        double heading = imu.getAngularOrientation().firstAngle; // change from positive
+        double heading = imu.getAngularOrientation().firstAngle; // maybe change to positive
 
       //  if (gamepad1.right_bumper) {
         //    imu.resetYaw();
