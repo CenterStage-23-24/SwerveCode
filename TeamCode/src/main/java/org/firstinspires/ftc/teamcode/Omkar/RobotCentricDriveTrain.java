@@ -1,21 +1,31 @@
 package org.firstinspires.ftc.teamcode.Omkar;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
-@TeleOp
-public class RobotCentricDriveTrain extends OpMode {
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
+public class RobotCentricDriveTrain {
 
     private DcMotor frontRightMotor;
     private DcMotor frontLeftMotor;
     private DcMotor backRightMotor;
     private DcMotor backLeftMotor;
 
-    @Override
-    //creates hardware map
-    public void init() {
+
+    Gamepad gamepad;
+    Telemetry telemetry;
+    public RobotCentricDriveTrain(HardwareMap hardwareMap, Gamepad gamepad, Telemetry telemetry) {
+        this.gamepad = gamepad;
+        this.telemetry = telemetry;
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
         backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
@@ -25,11 +35,10 @@ public class RobotCentricDriveTrain extends OpMode {
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    @Override
     public void loop() {
-        double verticalMovement = -gamepad1.left_stick_y;
-        double strafe = gamepad1.left_stick_x * 1.1;
-        double turning = gamepad1.right_stick_x;
+        double verticalMovement = -gamepad.left_stick_y;
+        double strafe = gamepad.left_stick_x * 1.1;
+        double turning = gamepad.right_stick_x;
         double maintainRatio = Math.max(Math.abs(verticalMovement) + Math.abs(strafe) + Math.abs(turning), 1);
         frontRightMotor.setPower((verticalMovement - strafe - turning) / maintainRatio);
         backRightMotor.setPower((verticalMovement + strafe - turning) / maintainRatio);
