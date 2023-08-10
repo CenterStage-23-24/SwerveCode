@@ -1,25 +1,26 @@
+
 package org.firstinspires.ftc.teamcode.Omkar;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-@TeleOp
-public class FieldCentricDriveTrain extends OpMode {
+public class FieldCentricDriveTrain {
     private DcMotor frontRightMotor;
     private DcMotor frontLeftMotor;
     private DcMotor backRightMotor;
     private DcMotor backLeftMotor;
-    private IMU imu;
+    private BNO055IMU imu;
 
-    @Override
-    public void init() {
+    Gamepad gamepad;
+    Telemetry telemetry;
+    public FieldCentricDriveTrain(HardwareMap hardwareMap, Gamepad gamepad, Telemetry telemetry) {
+        this.gamepad = gamepad;
+        this.telemetry = telemetry;
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
         backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
@@ -28,21 +29,17 @@ public class FieldCentricDriveTrain extends OpMode {
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        imu = hardwareMap.get(IMU.class, "imu");
-        IMU.Parameters params = new IMU.Parameters(
-                new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD, RevHubOrientationOnRobot.UsbFacingDirection.RIGHT));
-        imu.initialize(params);
-    }
-    @Override
-    public void loop() {
-        double verticalMovement = -gamepad1.left_stick_y;
-        double strafe = gamepad1.left_stick_x * 1.1;
-        double turning = gamepad1.right_stick_x;
-        double heading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+        imu.initialize(parameters);
 
-        if (gamepad1.right_bumper) {
-            imu.resetYaw();
-        }
+    }
+    public void loop() {
+        double verticalMovement = -gamepad.left_stick_y;
+        double strafe = gamepad.left_stick_x * 1.1;
+        double turning = gamepad.right_stick_x;
+        double heading = imu.getAngularOrientation().firstAngle;
 
         double rotatedStrafe = (strafe * Math.cos(-heading)) - (verticalMovement * Math.sin(-heading));
         double rotatedVerticalMovement = (strafe * Math.sin(-heading)) + (verticalMovement * Math.cos(-heading));
@@ -60,3 +57,9 @@ public class FieldCentricDriveTrain extends OpMode {
     }
 
 }
+
+
+
+
+
+

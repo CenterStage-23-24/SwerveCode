@@ -2,16 +2,17 @@ package org.firstinspires.ftc.teamcode.Omkar;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
 
 @TeleOp
 public class FieldCentricRun extends LinearOpMode {
 
-    FieldCentricOldIMU drive = new FieldCentricOldIMU();
+    FieldCentricDriveTrain drive;
+
     @Override
     public void runOpMode() {
-        drive.init();
+        drive = new FieldCentricDriveTrain(hardwareMap, gamepad1, telemetry);
         waitForStart();
         while(opModeIsActive()) {
             drive.loop();
@@ -20,3 +21,4 @@ public class FieldCentricRun extends LinearOpMode {
     }
 
 }
+
