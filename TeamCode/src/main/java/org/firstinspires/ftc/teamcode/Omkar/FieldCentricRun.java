@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @TeleOp
 public class FieldCentricRun extends LinearOpMode {
 
-    FieldCentricDriveTrain drive;
+    FieldCentricDriveTrain drive; // object of the field centric with old imu
 
     @Override
     public void runOpMode() {

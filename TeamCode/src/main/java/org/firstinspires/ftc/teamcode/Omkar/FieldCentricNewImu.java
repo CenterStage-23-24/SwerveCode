@@ -15,7 +15,7 @@ public class FieldCentricNewImu extends OpMode {
     private DcMotor frontLeftMotor;
     private DcMotor backRightMotor;
     private DcMotor backLeftMotor;
-    private IMU imu;
+    private IMU imu; // this is the imu in the new control hub
 
     @Override
     public void init() {

@@ -17,6 +17,7 @@ public class RobotCentricDriveTrain {
 
     Gamepad gamepad;
     Telemetry telemetry;
+    // constructor maps the hardware
     public RobotCentricDriveTrain(HardwareMap hardwareMap, Gamepad gamepad, Telemetry telemetry) {
         this.gamepad = gamepad;
         this.telemetry = telemetry;

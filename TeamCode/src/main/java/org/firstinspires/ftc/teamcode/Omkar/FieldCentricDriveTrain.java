@@ -14,7 +14,7 @@ public class FieldCentricDriveTrain {
     private DcMotor frontLeftMotor;
     private DcMotor backRightMotor;
     private DcMotor backLeftMotor;
-    private BNO055IMU imu;
+    private BNO055IMU imu; // this is the imu in the old control hub
 
     Gamepad gamepad;
     Telemetry telemetry;

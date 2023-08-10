@@ -11,7 +11,7 @@ public class RobotCentricRun extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        drive = new RobotCentricDriveTrain(hardwareMap,gamepad1, telemetry);
+        drive = new RobotCentricDriveTrain(hardwareMap,gamepad1, telemetry); // constructor to map the hardware is run
         waitForStart();
         while(opModeIsActive()) {
             drive.loop();
