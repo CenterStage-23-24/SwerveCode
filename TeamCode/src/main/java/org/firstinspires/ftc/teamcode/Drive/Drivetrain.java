@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.Drive;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 
 public class Drivetrain {
 
@@ -25,7 +25,7 @@ public class Drivetrain {
     private double translationY;
     private double rotationX;
 
-    public Drivetrain(DcMotorEx frMotor, Servo frServo, DcMotorEx flMotor, Servo flServo, DcMotorEx blMotor, Servo blServo, DcMotorEx brMotor, Servo brServo) {
+    public Drivetrain(DcMotorEx frMotor, CRServo frServo, DcMotorEx flMotor, CRServo flServo, DcMotorEx blMotor, CRServo blServo, DcMotorEx brMotor, CRServo brServo) {
 
         frontRight = new SwerveModule(frMotor, frServo, trackWidth/2, wheelBase/2);
         frontLeft = new SwerveModule(flMotor, flServo, -trackWidth/2, wheelBase/2);
@@ -35,7 +35,7 @@ public class Drivetrain {
     }
 
 
-    public void update(double translationJoyX, double translationJoyY, double rotationJoyX, double robotHeading) {
+    public void update(double translationJoyX, double translationJoyY, double rotationJoyX, double robotHeading, double servoPos) {
         heading = robotHeading;
         translationX = translationJoyX;
         translationY = translationJoyY;
