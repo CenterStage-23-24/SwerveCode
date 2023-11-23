@@ -1,7 +1,8 @@
 package org.firstinspires.ftc.teamcode.Drive;
 
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.CRServo;
+import com.arcrobotics.ftclib.hardware.motors.MotorEx;
+import org.firstinspires.ftc.teamcode.Hardware.Axon;
+import com.arcrobotics.ftclib.controller.PIDController;
 
 public class Drivetrain {
 
@@ -20,12 +21,19 @@ public class Drivetrain {
     private double wheelBase = 300; // Wheel base in mm
     private double trackWidth = 300; // Track Width in mm
 
-    private double heading;
-    private double translationX;
-    private double translationY;
-    private double rotationX;
+    private double heading; // Read from IMU
+    private double translationX; // Read from controller
+    private double translationY; // Read from controller
+    private double rotationX; // Read from controller
 
-    public Drivetrain(DcMotorEx frMotor, CRServo frServo, DcMotorEx flMotor, CRServo flServo, DcMotorEx blMotor, CRServo blServo, DcMotorEx brMotor, CRServo brServo) {
+    private double rotation; // Rotation from controller + heading PID input
+    private double[] translationVector;
+
+    private PIDController headingController;
+    private double p, i, d;
+    private double headingPID;
+
+    public Drivetrain(MotorEx frMotor, Axon frServo, MotorEx flMotor, Axon flServo, MotorEx blMotor, Axon blServo, MotorEx brMotor, Axon brServo) {
 
         frontRight = new SwerveModule(frMotor, frServo, trackWidth/2, wheelBase/2);
         frontLeft = new SwerveModule(flMotor, flServo, -trackWidth/2, wheelBase/2);
@@ -34,15 +42,33 @@ public class Drivetrain {
 
     }
 
+    public void update() {
 
-    public void update(double translationJoyX, double translationJoyY, double rotationJoyX, double robotHeading, double servoPos) {
-        heading = robotHeading;
-        translationX = translationJoyX;
-        translationY = translationJoyY;
-        rotationX = rotationJoyX;
+        translationVector[0] = translationX;
+        translationVector[1] = translationY;
 
-
-
+        switch (dtState) {
+            case IDLE:
+                // Calc heading PID
+                // Motor PID, will be implemented later
+            case DRIVING:
+                // Nothing special happens here, just a empty state for now
+            case TRANSLATING:
+                //Calc Heading PID
+        }
+        drive();
     }
 
+
+    public void drive() {
+        frontRight.update(translationVector, rotation, heading);
+        frontLeft.update(translationVector, rotation, heading);
+        backLeft.update(translationVector, rotation, heading);
+        backRight.update(translationVector, rotation, heading);
+    }
+
+    private double calcHeadingPID() {
+        //  Need to write, need to add some utils methods for this
+        return 0.0; // just here as placeholder
+    }
 }
