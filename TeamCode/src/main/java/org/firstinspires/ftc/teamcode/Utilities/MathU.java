@@ -27,4 +27,23 @@ public class MathU {
     public static double normalizeRadiansPi(double angle) {
        return normalizeRadians(angle);
     }
+
+    // Normalizes an array of doubles to a value x, doesnt change anything if there are no values over x in the array
+    // Note this method ignores the sign of a number but maintins it, EX: normalizeArrayX([-4, 2, -1], 1) returns [-1, 0.5, -0.25]
+    // x Must be positive
+    public static double[] normalizeArrayX(double[] array, double x) {
+        double maxValue = 0.0;
+        for (double value : array) {
+            maxValue = Math.max(Math.abs(value), maxValue);
+        }
+        if (maxValue <= x) {
+            return array;
+        }
+        double[] normalizedArray = array;
+        double scale = x/maxValue;
+        for (int i = 0; i< normalizedArray.length; i++) {
+            normalizedArray[i] = normalizedArray[i] * scale;
+        }
+        return normalizedArray;
+    }
 }

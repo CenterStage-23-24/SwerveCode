@@ -8,6 +8,4 @@ import com.qualcomm.robotcore.hardware.IMU;
 public class IMUX {
     private double yaw, pitch, roll;
     private IMU.Parameters params;
-
-
 }

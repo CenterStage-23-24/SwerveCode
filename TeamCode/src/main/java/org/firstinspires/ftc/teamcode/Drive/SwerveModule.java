@@ -73,8 +73,18 @@ public class SwerveModule {
             motorFlipped = false;
         }
 
+        motorPower = Math.hypot(translationVector[0], translationVector[1]);
+
         servoPower = servoPowerRange.clip(servoController.calculate(0, MathU.normalizeRadiansPi(error)));
         servo.setPower(servoPower);
     }
 
+    public double getMotorPower() {
+        return motorPower;
+    }
+
+    public void setMotorPower(double power) {
+        power = (motorFlipped) ? -power : power;
+        motor.set(power);
+    }
 }

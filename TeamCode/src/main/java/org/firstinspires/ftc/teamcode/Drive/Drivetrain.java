@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.Drive;
 
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import org.firstinspires.ftc.teamcode.Hardware.Axon;
+import org.firstinspires.ftc.teamcode.Utilities.MathU;
+
 import com.arcrobotics.ftclib.controller.PIDController;
 
 public class Drivetrain {
@@ -65,6 +67,14 @@ public class Drivetrain {
         frontLeft.update(translationVector, rotation, heading);
         backLeft.update(translationVector, rotation, heading);
         backRight.update(translationVector, rotation, heading);
+
+        double[] motorPowers = new double[]{frontRight.getMotorPower(), frontLeft.getMotorPower(), backLeft.getMotorPower(), backRight.getMotorPower()};
+        motorPowers = MathU.normalizeArrayX(motorPowers, 1.0);
+
+        frontRight.setMotorPower(motorPowers[0]);
+        frontLeft.setMotorPower(motorPowers[1]);
+        backLeft.setMotorPower(motorPowers[2]);
+        backRight.setMotorPower(motorPowers[3]);
     }
 
     private double calcHeadingPID() {
