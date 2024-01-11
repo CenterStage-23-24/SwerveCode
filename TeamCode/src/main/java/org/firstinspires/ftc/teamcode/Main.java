@@ -1,13 +1,29 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp(name = "Test")
-public class Main extends LinearOpMode {
+public class Main extends OpMode {
 
-    public void runOpMode(){
-        HWMap map = new HWMap(telemetry, hardwareMap);
+    public void init() {
+
+    }
+
+    public void init_loop() {
+
+    }
+
+    public void start() {
+
+    }
+
+    public void loop() {
+
+    }
+
+    public void stop() {
+
     }
 }
 

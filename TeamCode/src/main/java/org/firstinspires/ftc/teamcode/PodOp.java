@@ -2,13 +2,12 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import org.firstinspires.ftc.teamcode.Pod;
 
 @TeleOp(name = "PodOp")
 public class PodOp extends LinearOpMode {
     public void runOpMode(){
 
-        HWMap map = new HWMap(telemetry, hardwareMap);
+        RobotHardware map = new RobotHardware(telemetry, hardwareMap);
         telemetry.addLine("Module is Initializing...");
         telemetry.update();
         Pod pod = new Pod(map.servo, map.motor);

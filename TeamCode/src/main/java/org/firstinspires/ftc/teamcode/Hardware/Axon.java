@@ -41,6 +41,19 @@ public class Axon {
         powerCoef = (invertPower) ? -1.0 : 1.0;
     }
 
+    public Axon(CRServo servo, AnalogInput encoder) {
+
+        this.servo = servo;
+        this.encoder = encoder;
+
+        this.invertPower = false;
+        this.invertEncoder = false;
+
+        this.encoderOffset = 0.0;
+
+        powerCoef = (invertPower) ? -1.0 : 1.0;
+    }
+
     // Updates rawPos and pos
     public void updatePos() {
         rawPos = encoder.getVoltage() / 3.3 * MathU.TAU;
