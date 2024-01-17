@@ -87,6 +87,6 @@ public class SwerveModule {
 
     public void setMotorPower(double power) {
         power = (motorFlipped) ? -power : power;
-        motor.set(power);
+        //motor.set(power);
     }
 }
