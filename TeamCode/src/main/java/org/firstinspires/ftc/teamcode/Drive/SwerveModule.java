@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.Drive;
 
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
+
+import org.firstinspires.ftc.teamcode.Hardware.MotorX;
 import org.firstinspires.ftc.teamcode.Utilities.MathU;
 import org.firstinspires.ftc.teamcode.Utilities.RangeLimiter;
 import com.arcrobotics.ftclib.controller.PIDFController;
@@ -8,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Hardware.Axon;
 
 public class SwerveModule {
 
-    private MotorEx motor;
+    private MotorX motor;
     private Axon servo;
 
     private PIDFController servoController;
@@ -39,7 +41,7 @@ public class SwerveModule {
     private double motorPower;
     private double targetVelocity;
 
-    public SwerveModule(MotorEx motor, Axon servo, double xPos, double yPos) {
+    public SwerveModule(MotorX motor, Axon servo, double xPos, double yPos) {
         this.motor = motor;
         this.servo = servo;
 
